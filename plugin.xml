@@ -2,7 +2,7 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="cordova-plugin-wifiinfo"
-    version="0.0.2">
+    version="0.0.3">
 
     <name>WifiInfo</name>
     <description>WifiInfo plugin for Cordova/Phonegap</description>
@@ -42,6 +42,6 @@
         <source-file src="src/ios/Hostname.m"/>
 
     </platform>
-        <dependency id="cordova-plugin-add-swift-support" version="1.7.1"/>
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2"/>
 
 </plugin>
