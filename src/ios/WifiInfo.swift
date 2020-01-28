@@ -8,7 +8,7 @@ import Foundation
     override public func onAppTerminate() {
     }
 
-    public func getHostname(_ command: CDVInvokedUrlCommand) {
+    @objc(getHostname:) public func getHostname(_ command: CDVInvokedUrlCommand) {
 
         let hostname = Hostname.get() as String
 
@@ -20,7 +20,7 @@ import Foundation
         self.commandDelegate?.send(pluginResult, callbackId: command.callbackId)
     }
 
-    public func getInfo(_ command: CDVInvokedUrlCommand) {
+    @objc(getInfo:) public func getInfo(_ command: CDVInvokedUrlCommand) {
 
         #if DEBUG
             print("WifiInfo: getInfo")
