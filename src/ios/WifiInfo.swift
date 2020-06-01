@@ -1,4 +1,5 @@
 import Foundation
+import SystemConfiguration.CaptiveNetwork
 
 @objc(WifiInfo) public class WifiInfo : CDVPlugin  {
 
@@ -10,7 +11,18 @@ import Foundation
 
     @objc(getHostname:) public func getHostname(_ command: CDVInvokedUrlCommand) {
 
-        let hostname = Hostname.get() as String
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        
+        // let hostname = Hostname.get() as String
+        let hostname = ssid
 
         #if DEBUG
             print("WifiInfo: hostname \(hostname)")
@@ -26,7 +38,18 @@ import Foundation
             print("WifiInfo: getInfo")
         #endif
 
-        let hostname = Hostname.get() as String
+        var ssid: String?
+        if let interfaces = CNCopySupportedInterfaces() as NSArray? {
+            for interface in interfaces {
+                if let interfaceInfo = CNCopyCurrentNetworkInfo(interface as! CFString) as NSDictionary? {
+                    ssid = interfaceInfo[kCNNetworkInfoKeySSID as String] as? String
+                    break
+                }
+            }
+        }
+        
+        // let hostname = Hostname.get() as String
+        let hostname = ssid
         let message: NSDictionary = NSDictionary(
             objects: [hostname, false, false, false],
             forKeys: ["hostname" as NSCopying, "connection" as NSCopying, "interfaces" as NSCopying, "dhcp" as NSCopying]
