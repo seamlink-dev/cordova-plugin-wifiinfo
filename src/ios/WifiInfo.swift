@@ -51,11 +51,11 @@ import SystemConfiguration.CaptiveNetwork
         // let hostname = Hostname.get() as String
         let hostname = ssid
         let message: NSDictionary = NSDictionary(
-            objects: [hostname, false, false, false],
+            objects: [hostname ?? "", false, false, false],
             forKeys: ["hostname" as NSCopying, "connection" as NSCopying, "interfaces" as NSCopying, "dhcp" as NSCopying]
         )
 
-        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: message as! [AnyHashable: Any])
+        let pluginResult = CDVPluginResult(status: CDVCommandStatus_OK, messageAs: (message as! [AnyHashable: Any]))
         self.commandDelegate?.send(pluginResult, callbackId: command.callbackId)
     }
 
